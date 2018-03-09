@@ -1,10 +1,16 @@
 package com.example.anna.loginscreen;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,10 +24,23 @@ public class MainActivity extends Activity  {
     TextView tx1;
     int counter = 3;
 
+    Dialog Login;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        final View layout = inflater.inflate(R.layout.password_dialog, (ViewGroup) findViewById(R.id.root));
+        final EditText password1 = (EditText) layout.findViewById(R.id.EditText_Pwd1);
+        final EditText password2 = (EditText) layout.findViewById(R.id.EditText_Pwd2);
+        final TextView error = (TextView) layout.findViewById(R.id.TextView_PwdProblem);
+
+        //
 
         b1 = (Button)findViewById(R.id.button);
         ed1 = (EditText)findViewById(R.id.editText);
@@ -30,6 +49,10 @@ public class MainActivity extends Activity  {
         b2 = (Button)findViewById(R.id.button2);
         tx1 = (TextView)findViewById(R.id.textView3);
         tx1.setVisibility(View.GONE);
+
+        Login = new Dialog(this);
+        Login.setTitle("Enter Your Login Information");
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,5 +82,32 @@ public class MainActivity extends Activity  {
                 finish();
             }
         });
+
+
+
     }
+    //Custom dialog for registration
+    public void Registration(View view) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.password_dialog);
+        dialog.setTitle("Register");
+
+        dialog.show();
+        Window window=dialog.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        Button  PopUpClose = (Button) dialog.findViewById(R.id.Register);
+        //competitorOneWon.setContentView(R.layout.popup1);
+        // PopUpClose = (Button) competitorOneWon.findViewById(R.id.dismiss1);
+        PopUpClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+               // Toast.makeText(getApplicationContext(), "Please, Reset Score and Timer", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+
+
 }
