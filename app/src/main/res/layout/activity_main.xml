@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Login"
+        android:text="Please, login to start using App"
         android:textSize="35dp" />
 
     <TextView
